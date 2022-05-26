@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix
 
 df = pd.read_csv('data/sonar.all-data', header=None, prefix='X')
 print(df.shape)
@@ -16,3 +17,5 @@ X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.3)
 classifier.fit(X_train, y_train)
 print("[train]score=", classifier.score(X_train, y_train))
 print("[test]score=", classifier.score(X_test, y_test))
+y_predict = classifier.predict(X_test)
+print(confusion_matrix(y_predict, y_test))
